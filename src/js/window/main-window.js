@@ -21,6 +21,8 @@ const notifications = require('./notifications.js')
 const NotificationData = require('../../data/messages.json')
 const Guides = require('./guides.js')
 
+const ShotTemplateSystem = require('../shot-template-system')
+
 let boardFilename
 let boardPath
 let boardData
@@ -67,6 +69,8 @@ let guides
 
 let storyboarderSketchPane
 let paintingCanvas
+
+let shotTemplateSystem
 
 menu.setMenu()
 
@@ -491,7 +495,9 @@ let loadBoardUI = ()=> {
     textInputMode = false
   })
 
+  shotTemplateSystem = new ShotTemplateSystem()
 
+  window.shotTemplateSystem = shotTemplateSystem
 
   setTimeout(()=>{remote.getCurrentWindow().show()}, 200)
   //remote.getCurrentWebContents().openDevTools()

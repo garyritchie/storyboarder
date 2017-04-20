@@ -16,6 +16,7 @@ let newWindow
 let mainWindow
 let sketchWindow
 let welcomeInprogress
+let stsWindow
 
 let statWatcher
 
@@ -47,11 +48,13 @@ app.on('ready', ()=> {
   }
 
   // open the welcome window when the app loads up first
-  openWelcomeWindow()
+  //openWelcomeWindow()
+  openStsWindow()
 })
 
 app.on('activate', ()=> {
   if (!mainWindow && !welcomeWindow) openWelcomeWindow()
+  
 })
 
 let openNewWindow = () => {
@@ -64,6 +67,19 @@ let openNewWindow = () => {
   }
   newWindow.show()
 }
+
+let openStsWindow = () => {
+  console.log("sts")
+  if (!stsWindow) {
+    stsWindow = new BrowserWindow({width: 600, height: 580, show: false, center: true, resizable: false, frame: false, modal: false})
+    stsWindow.loadURL(`file://${__dirname}/../sts-window.html`)
+    stsWindow.once('ready-to-show', () => {
+      stsWindow.show()
+    })
+  }
+  stsWindow.show()
+}
+
 
 let openWelcomeWindow = ()=> {
   // RESET PREFS - SHOULD BE COMMENTED OUT
